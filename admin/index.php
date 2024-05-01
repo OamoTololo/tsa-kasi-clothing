@@ -44,15 +44,25 @@
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tbody>
+                                                <?php
+                                                    for($i = 0; $i <= 10; $i++) {
+                                                        $brands = "SELECT * FROM brands WHERE brandname = '$i'";
+                                                        $runBrands = mysqli_query($connection, $brands);
+                                                        $brandRow = mysqli_num_rows($runBrands);
+
+                                                ?>
                                                 <tr>
                                                     <th class="bg-light text-dark">No of Products <?php ;?></th>
-                                                    <th class="text-danger">R<?php ?></th>
+                                                    <th class="text-danger"><?php $i?></th>
                                                 </tr>
                                                 <tr>
                                                     <th class="bg-light text-dark">Total Products Amount <?php ;?></th>
                                                     <th class="text-danger">R<?php ?></th>
                                                 </tr>
-                                                </tbody>
+
+                                                <?php
+                                                    }
+                                                ?>
                                             </table>
                                         </div>
                                     </div>

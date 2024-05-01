@@ -44,12 +44,8 @@
                 <table class="table table-bordered mt-3" id="tableToExcel">
                     <thead class="bg-dark text-white">
                     <tr>
-                        <th>Payment Id</th>
-                        <th>Order Id</th>
-                        <th>Invoice No</th>
-                        <th>Amount</th>
-                        <th>Payment Code</th>
-                        <th>Modified Date</th>
+                        <th>Brand Id</th>
+                        <th>Brand Name</th>
                         <th>
                             <i class="fa fa-eye"></i>
                         </th>
@@ -63,12 +59,20 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td></td>
+                        <?php
+                        $brandName = $_POST['brandName'];
+                        $selectBrand = "SELECT * FROM brands WHERE brandName = '$brandName'";
+                        $selectResult = mysqli_query($connection, $selectBrand);
+                        $categoryRows = mysqli_num_rows($selectResult);
+                        $i = 0;
+                        while ($row = mysqli_fetch_array($runSelectCategory)) {
+                            $categoryId = $row['categoryId'];
+                            $categoryName = $row['categoryName'];
+                            $i++;
+                        }
+                        ?>
+                        <td><?php $i; ?></td>
+                        <td><?php $brandName; ?></td>
                         <td>
                             <a class="btn btn-info" href="student-details.php?id=<?php ?>">
                                 <i class="fa fa-eye"></i>

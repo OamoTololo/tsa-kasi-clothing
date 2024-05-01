@@ -1,3 +1,27 @@
+<?php
+include '../inc/connect.php';
+
+if(isset($_POST['saveCategory'])) {
+    $categoryName = $_POST['categoryName'];
+
+    $selectCategory = "SELECT * FROM products WHERE categoryName = '$categoryName'";
+    $selectResult = mysqli_query($connection, $selectCategory);
+    $categoryRows = mysqli_num_rows($selectResult);
+
+    if($categoryRows > 0) {
+        echo "<script>alert('Category name already exists');</script>";
+        echo "<script>window.open('../admin/categories.php', '_self')</script>";
+    }
+    $insertCategory = "INSERT INTO products (categoryName) VALUES ('$categoryName')";
+    $insertResult = mysqli_query($connection, $insertCategory);
+
+    if($insertResult) {
+        echo "<script>alert('New Category Added Successfully!');</script>";
+        echo "<script>window.open('../admin/categories.php', '_self')</script>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

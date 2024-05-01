@@ -1,3 +1,27 @@
+<?php
+include '../inc/connect.php';
+
+if(isset($_POST['saveBrand'])) {
+    $brandName = $_POST['brandName'];
+
+    $selectBrand = "SELECT * FROM brands WHERE brandName = '$brandName'";
+    $selectResult = mysqli_query($connection, $selectBrand);
+    $brandRows = mysqli_num_rows($selectResult);
+
+    if($brandRows > 0) {
+        echo "<script>alert('Brand name already exists');</script>";
+        echo "<script>window.open('../admin/brands.php', '_self')</script>";
+    }
+    $insertBrand = "INSERT INTO brands (brandName) VALUES ('$brandName')";
+    $insertResult = mysqli_query($connection, $insertBrand);
+
+    if($insertResult) {
+        echo "<script>alert('New Brand Added Successfully!');</script>";
+        echo "<script>window.open('../admin/brands.php', '_self')</script>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,12 +66,12 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label text-danger" for="imageTitle">Brand Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control text-center" placeholder="Enter Brand Name" name="brandName" required id="brandName" autocomplete="off">
+                            <input type="text" class="form-control text-center" placeholder="Enter Brand Name" name="brandName" required id="saveBrand" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-outline-success btn-block" name="submit">Save Brand</button>
+                            <button type="submit" class="btn btn-outline-success btn-block" name="saveBrand">Save Brand</button>
                         </div>
                     </div>
                 </form>

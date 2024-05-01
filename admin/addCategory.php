@@ -1,3 +1,27 @@
+<?php
+include '../inc/connect.php';
+
+if(isset($_POST['saveCategory'])) {
+    $categoryName = $_POST['categoryName'];
+
+    $selectCategory = "SELECT * FROM categories WHERE categoryName = '$categoryName'";
+    $selectResult = mysqli_query($connection, $selectCategory);
+    $categoryRows = mysqli_num_rows($selectResult);
+
+    if($categoryRows > 0) {
+        echo "<script>alert('Category name already exists');</script>";
+        echo "<script>window.open('../admin/categories.php', '_self')</script>";
+    }
+    $insertCategory = "INSERT INTO categories (categoryName) VALUES ('$categoryName')";
+    $insertResult = mysqli_query($connection, $insertCategory);
+
+    if($insertResult) {
+        echo "<script>alert('New Category Added Successfully!');</script>";
+        echo "<script>window.open('../admin/categories.php', '_self')</script>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -40,14 +64,14 @@
             <div class="col-md-12">
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label text-danger" for="imageTitle">Category Name</label>
+                        <label class="col-sm-2 col-form-label text-danger" for="categoryName">Category Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-center" placeholder="Enter Product Name" name="categoryName" required id="categoryName" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-outline-success btn-block" name="submit">Save Category</button>
+                            <button type="submit" class="btn btn-outline-success btn-block" name="saveCategory">Save Category</button>
                         </div>
                     </div>
                 </form>

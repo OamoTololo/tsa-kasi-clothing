@@ -1,3 +1,7 @@
+<?php
+    include '../includes/connection.php';
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,6 +31,7 @@
         <?php include '../admin/top.php'?>
         <?php include('../admin/navbar.php');?>
         <?php include('../admin/user-panel.php');?>
+        <?php include '../includes/connection.php'; ?>
     </div>
 </div>
 
@@ -44,12 +49,8 @@
                 <table class="table table-bordered mt-3" id="tableToExcel">
                     <thead class="bg-dark text-white">
                     <tr>
-                        <th>Payment Id</th>
-                        <th>Order Id</th>
-                        <th>Invoice No</th>
-                        <th>Amount</th>
-                        <th>Payment Code</th>
-                        <th>Modified Date</th>
+                        <th>Category Id</th>
+                        <th>Category Name</th>
                         <th>
                             <i class="fa fa-eye"></i>
                         </th>
@@ -63,12 +64,19 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td></td>
+                        <?php
+                            $categoryName = $_POST['categoryName'];
+                            $selectCategory = "SELECT * FROM categories WHERE categoryName = '$categoryName'";
+                            $selectResult = mysqli_query($connection, $selectCategory);
+                            $categoryRows = mysqli_num_rows($selectResult);
+                            $i = 0;
+                            while ($row = mysqli_fetch_array($runSelectCategory)) {
+                                $categoryId = $row['categoryId'];
+                                $categoryName = $row['categoryName'];
+                                $i++;
+                        ?>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $categoryName; ?></td>
                         <td>
                             <a class="btn btn-info" href="student-details.php?id=<?php ?>">
                                 <i class="fa fa-eye"></i>
@@ -86,6 +94,9 @@
                         </td>
                     </tr>
                     </tbody>
+                    <?php
+                    }
+                    ?>
                 </table>
             </div>
         </div>
