@@ -1,3 +1,7 @@
+<?php
+    include("../inc/connect.php");
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,6 +50,7 @@
                     <tr>
                         <th>Brand Id</th>
                         <th>Brand Name</th>
+                        <th>Modified Date</th>
                         <th>
                             <i class="fa fa-eye"></i>
                         </th>
@@ -60,19 +65,19 @@
                     <tbody>
                     <tr>
                         <?php
-                        $brandName = $_POST['brandName'];
-                        $selectBrand = "SELECT * FROM brands WHERE brandName = '$brandName'";
+                        $selectBrand = "SELECT * FROM `brands` ORDER BY brandId ASC";
                         $selectResult = mysqli_query($connection, $selectBrand);
-                        $categoryRows = mysqli_num_rows($selectResult);
                         $i = 0;
-                        while ($row = mysqli_fetch_array($runSelectCategory)) {
-                            $categoryId = $row['categoryId'];
-                            $categoryName = $row['categoryName'];
+                        while ($row = mysqli_fetch_array($selectResult)) {
+                            $brandId = $row['brandId'];
+                            $brandName = $row['brandName'];
+                            $modifiedDate = $row['modifiedDate'];
                             $i++;
                         }
                         ?>
-                        <td><?php $i; ?></td>
-                        <td><?php $brandName; ?></td>
+                        <td><?php echo $brandId; ?></td>
+                        <td><?php echo $brandName; ?></td>
+                        <td><?php echo $modifiedDate; ?></td>
                         <td>
                             <a class="btn btn-info" href="student-details.php?id=<?php ?>">
                                 <i class="fa fa-eye"></i>

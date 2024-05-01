@@ -1,3 +1,7 @@
+<?php
+    include '../inc/connect.php';
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +50,7 @@
                                                 <tbody>
                                                 <?php
                                                     for($i = 0; $i <= 10; $i++) {
-                                                        $brands = "SELECT * FROM brands WHERE brandname = '$i'";
+                                                        $brands = "SELECT * FROM brands WHERE brandName = '$i'";
                                                         $runBrands = mysqli_query($connection, $brands);
                                                         $brandRow = mysqli_num_rows($runBrands);
 

@@ -1,8 +1,9 @@
 <?php
-include '../inc/connect.php';
+include 'inc/connect.php';
 
 if(isset($_POST['saveBrand'])) {
     $brandName = $_POST['brandName'];
+    $date = $_POST['date'];
 
     $selectBrand = "SELECT * FROM brands WHERE brandName = '$brandName'";
     $selectResult = mysqli_query($connection, $selectBrand);
@@ -12,7 +13,7 @@ if(isset($_POST['saveBrand'])) {
         echo "<script>alert('Brand name already exists');</script>";
         echo "<script>window.open('../admin/brands.php', '_self')</script>";
     }
-    $insertBrand = "INSERT INTO brands (brandName) VALUES ('$brandName')";
+    $insertBrand = "INSERT INTO brands (brandName, modifiedDate) VALUES ('$brandName', '$date')";
     $insertResult = mysqli_query($connection, $insertBrand);
 
     if($insertResult) {
@@ -67,6 +68,12 @@ if(isset($_POST['saveBrand'])) {
                         <label class="col-sm-2 col-form-label text-danger" for="imageTitle">Brand Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-center" placeholder="Enter Brand Name" name="brandName" required id="saveBrand" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-danger" for="date">Date</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control text-center" name="date" required id="date" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">

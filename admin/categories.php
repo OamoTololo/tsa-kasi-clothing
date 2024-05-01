@@ -1,5 +1,5 @@
 <?php
-    include '../includes/connection.php';
+    include '../inc/connect.php';
 ?>
 
 <!doctype html>
@@ -31,7 +31,6 @@
         <?php include '../admin/top.php'?>
         <?php include('../admin/navbar.php');?>
         <?php include('../admin/user-panel.php');?>
-        <?php include '../includes/connection.php'; ?>
     </div>
 </div>
 
@@ -51,6 +50,7 @@
                     <tr>
                         <th>Category Id</th>
                         <th>Category Name</th>
+                        <th>modified Date</th>
                         <th>
                             <i class="fa fa-eye"></i>
                         </th>
@@ -65,18 +65,18 @@
                     <tbody>
                     <tr>
                         <?php
-                            $categoryName = $_POST['categoryName'];
-                            $selectCategory = "SELECT * FROM categories WHERE categoryName = '$categoryName'";
+                            $selectCategory = "SELECT * FROM categories ORDER BY categoryId";
                             $selectResult = mysqli_query($connection, $selectCategory);
-                            $categoryRows = mysqli_num_rows($selectResult);
                             $i = 0;
-                            while ($row = mysqli_fetch_array($runSelectCategory)) {
+                            while ($row = mysqli_fetch_array($selectResult)) {
                                 $categoryId = $row['categoryId'];
                                 $categoryName = $row['categoryName'];
+                                $modifiedDate = $row['modifiedDate'];
                                 $i++;
                         ?>
-                        <td><?php echo $i; ?></td>
+                        <td><?php echo $categoryId; ?></td>
                         <td><?php echo $categoryName; ?></td>
+                        <td><?php echo $modifiedDate; ?></td>
                         <td>
                             <a class="btn btn-info" href="student-details.php?id=<?php ?>">
                                 <i class="fa fa-eye"></i>

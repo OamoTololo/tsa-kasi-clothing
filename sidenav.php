@@ -1,74 +1,38 @@
+<?php
+    include('inc/connect.php');
+
+?>
+
 <div class="list-group bg-dark">
-    <a href="index.php" class="list-group-item list-group-item-action bg-dark text-center text-white">
-        <i class="fa fa-tachometer"></i> Brands
-    </a>
-    <a href="../admin/gallery.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-camera"></i> Owdi Designs
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-    <a href="../admin/student.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-user"></i> Logic vibes
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-    <a href="../admin/review.php" class="list-group-item list-group-item-action bg-dark text-center text-white">
-        <i class="fa fa-star"></i> Categories
-    </a>
-    <a href="../admin/course.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-life-ring"></i> Shirts
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-    <a href="../admin/register.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-lightbulb"></i> T-Shirts
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
+    <ul class="navbar-nav text-center bg-dark">
+        <li class="nav-item bg-dark">
+            <a href="" class="nav-link text-white"><h5>Brands</h5></a>
+        </li>
+            <?php
+            $selectBrands = "SELECT * FROM `brands`";
+            $selectBrandsQuery = mysqli_query($connection, $selectBrands);
 
-    <a href="../admin/fees.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-money-bill"></i> Jeans
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
+            while ($row = mysqli_fetch_assoc($selectBrandsQuery)) {
+                $brandId = $row['brandId'];
+                $brandName = $row['brandName'];
+            echo "<li class='nav-item'><a href='' class='nav-link text-dark bg-light'>$brandName</a></li>";
+            }
+        ?>
+    </ul>
 
-    <a href="../admin/category.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-sort"></i> Hats
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
+    <ul class="navbar-nav text-center">
+        <li class="nav-item bg-dark">
+            <a href="" class="nav-link text-white"><h5>Categories</h5></a>
+        </li>
+        <?php
+        $selectCategory = "SELECT * FROM `categories`";
+        $selectCategoryQuery = mysqli_query($connection, $selectCategory);
 
-    <a href="../admin/expense.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-money-bill"></i> Shoes
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-
-    <a href="../admin/exam.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-question"></i> Accessories
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-
-    <a href="../admin/message.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-envelope"></i> Gloves
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
-
-    <a href="../admin/complaint.php" class="list-group-item list-group-item-action">
-        <i class="fa fa-window-close"></i> Jackets
-        <button type="button" class="btn btn-primary pull-right btn-sm">
-            <span class="badge badge-light text-danger"><?php ?></span>
-        </button>
-    </a>
+        while ($row = mysqli_fetch_assoc($selectCategoryQuery)) {
+            $categoryId = $row['categoryId'];
+            $categoryName = $row['categoryName'];
+            echo "<li class='nav-item'><a href='' class='nav-link text-dark bg-light'>$categoryName</a></li>";
+        }
+        ?>
+    </ul>
 </div>

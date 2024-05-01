@@ -3,6 +3,7 @@ include '../inc/connect.php';
 
 if(isset($_POST['saveCategory'])) {
     $categoryName = $_POST['categoryName'];
+    $date = $_POST['date'];
 
     $selectCategory = "SELECT * FROM categories WHERE categoryName = '$categoryName'";
     $selectResult = mysqli_query($connection, $selectCategory);
@@ -12,7 +13,7 @@ if(isset($_POST['saveCategory'])) {
         echo "<script>alert('Category name already exists');</script>";
         echo "<script>window.open('../admin/categories.php', '_self')</script>";
     }
-    $insertCategory = "INSERT INTO categories (categoryName) VALUES ('$categoryName')";
+    $insertCategory = "INSERT INTO categories (categoryName, modifiedDate) VALUES ('$categoryName', '$date')";
     $insertResult = mysqli_query($connection, $insertCategory);
 
     if($insertResult) {
@@ -67,6 +68,12 @@ if(isset($_POST['saveCategory'])) {
                         <label class="col-sm-2 col-form-label text-danger" for="categoryName">Category Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-center" placeholder="Enter Product Name" name="categoryName" required id="categoryName" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-danger" for="date">Date</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control text-center" name="date" required id="date" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
